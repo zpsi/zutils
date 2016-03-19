@@ -11,18 +11,13 @@ import org.zpsi.dev.events.EventListener;
 
 public final class Main extends JavaPlugin {
 
-    FileConfiguration config = getConfig();
-    Config configClass = new Config(this);
-
-    public FormatMessage formatMessage(){
-        FormatMessage formatMessage = new FormatMessage(this);
-        return formatMessage;
-    }
-
-    FormatMessage formatMessage = formatMessage();
+    private FileConfiguration config = getConfig();
+    private Config configClass = new Config(this);
+    private FormateMessage fMessage;
 
     @Override
     public void onEnable() {
+        fMessage = new FormateMessage(this);
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
         configClass.configDefaults();
     }
