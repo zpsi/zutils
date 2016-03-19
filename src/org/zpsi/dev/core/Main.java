@@ -8,8 +8,8 @@ import org.zpsi.dev.config.Config;
 import org.zpsi.dev.events.EventListener;
 
 public final class Main extends JavaPlugin {
-    FileConfiguration config;
-    FormatMessage formatMessage;
+    public FileConfiguration config;
+    public FormatMessage formatMessage;
 
     public FormatMessage formatMessage(){
         FormatMessage formatMessage = new FormatMessage(this);
@@ -18,8 +18,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        FileConfiguration config = getConfig();
-        FormatMessage formatMessage = formatMessage();
+        config = getConfig();
+        formatMessage = formatMessage();
         Config configClass = new Config(this);
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
         configClass.configDefaults();
