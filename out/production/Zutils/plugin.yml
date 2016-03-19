@@ -1,0 +1,19 @@
+name: Zutils
+version: Alpha v0.01
+author: zpsi
+main: org.zpsi.dev.core.Main
+website: https://dev.zpsi.org
+description: Assortment of utilities with varying degrees of usefulness.
+commands:
+   zutils:
+      description: Main Zutils command.
+      usage: /<command> [option|help [target|page]]
+      aliases: [z]
+   zchat:
+      description: Request to private chat with another player.
+      usage: /<command> [start|stop|add [player]]
+      aliases: [zc]
+   regclick:
+      description: Register a command to be run on block-interact event.
+      usage: /<command> [start|stop|remove]
+      aliases: [zrc, rc]
