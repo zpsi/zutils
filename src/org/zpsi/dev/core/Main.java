@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.zpsi.dev.config.Config;
 import org.zpsi.dev.events.EventListener;
 
+//Testing
+
 public final class Main extends JavaPlugin {
 
     FileConfiguration config = getConfig();
