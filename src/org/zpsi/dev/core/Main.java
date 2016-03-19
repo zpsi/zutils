@@ -147,7 +147,7 @@ public final class Main extends JavaPlugin {
         String[] commands = null;
         String[] usage = null;
         Boolean isPage = false;
-        if (topic.equalsIgnoreCase("main")) {
+        if (topic.equalsIgnoreCase("main") || topic.equalsIgnoreCase("zutils") || topic.equalsIgnoreCase("z")) {
             maxPages = 1;
             header =  ChatColor.DARK_AQUA + "Zutils main help page.";
             switch(page){
@@ -173,6 +173,7 @@ public final class Main extends JavaPlugin {
                 }
             }
         } else if (topic.equalsIgnoreCase("commands") || topic.equalsIgnoreCase("cmds") || topic.equalsIgnoreCase("cmd")) {
+            header =  ChatColor.DARK_AQUA + "Zutils commands.";
             switch(page) {
                 case 1 : {
                     maxPages = 1;
