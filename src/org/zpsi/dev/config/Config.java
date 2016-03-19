@@ -14,7 +14,7 @@ public class Config {
         this.plugin = instance;
     }
 
-    FileConfiguration config = this.plugin.getConfig();
+    FileConfiguration config = plugin.getConfig();
 
     public void configDefaults() {
 

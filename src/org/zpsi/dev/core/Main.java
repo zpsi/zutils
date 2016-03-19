@@ -7,22 +7,20 @@ import org.bukkit.command.CommandSender;
 import org.zpsi.dev.config.Config;
 import org.zpsi.dev.events.EventListener;
 
-//Testing
-
 public final class Main extends JavaPlugin {
-
-    FileConfiguration config = getConfig();
-    Config configClass = new Config(this);
+    FileConfiguration config;
+    FormatMessage formatMessage;
 
     public FormatMessage formatMessage(){
         FormatMessage formatMessage = new FormatMessage(this);
         return formatMessage;
     }
 
-    FormatMessage formatMessage = formatMessage();
-
     @Override
     public void onEnable() {
+        FileConfiguration config = getConfig();
+        FormatMessage formatMessage = formatMessage();
+        Config configClass = new Config(this);
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
         configClass.configDefaults();
     }
