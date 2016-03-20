@@ -1,8 +1,8 @@
 name: Zutils
 version: Alpha v0.01
 author: zpsi
-main: org.zpsi.dev.core.Main
-website: https://dev.zpsi.org
+main: org.zpsi.dev.Main
+website: http://dev.zpsi.org
 description: Assortment of utilities with varying degrees of usefulness.
 commands:
    zutils:
