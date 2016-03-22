@@ -1,4 +1,4 @@
-package org.zpsi.dev.config;
+package org.zpsi.dev.files;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -6,11 +6,12 @@ import org.zpsi.dev.Main;
 
 import java.io.File;
 
-public class UserConfig {
-    Plugin plugin;
+public class UserManager {
 
-    public UserConfig(Main plugin) {
-        this.plugin = plugin;
+    private Main plugin;
+
+    public UserManager(Main instance) {
+        this.plugin = instance;
         try {
             if (!plugin.getDataFolder().exists()) {
                 plugin.getDataFolder().mkdirs();
