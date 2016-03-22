@@ -2,7 +2,7 @@ package org.zpsi.dev.config;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.zpsi.dev.core.Main;
+import org.zpsi.dev.Main;
 
 import java.io.File;
 

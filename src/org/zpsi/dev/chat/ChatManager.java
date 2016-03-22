@@ -1,66 +1,19 @@
-package org.zpsi.dev.core;
+package org.zpsi.dev.chat;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.util.StringUtil;
-import org.zpsi.dev.events.EventListener;
+import org.zpsi.dev.Main;
 
-import java.util.Arrays;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
+public class ChatManager {
 
-public final class Main extends JavaPlugin {
-    public FileConfiguration config;
-    String prefix;
+    private Main plugin;
+    private FileConfiguration config;
+    private String prefix;
 
-    @Override
-    public void onEnable() {
-        config = getConfig();
-        getServer().getPluginManager().registerEvents(new EventListener(this), this);
-        configDefaults();
+    public ChatManager(Main instance){
+        this.plugin = instance.getInstance();
+        config = plugin.getConfig();
         prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Formatting.Prefix"));
-    }
-
-    @Override
-    public void onDisable() {
-
-    }
-
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (cmd.getName().equalsIgnoreCase("zutils")) {
-
-            if (args.length < 1 || args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("h")) {
-                if (args.length < 2 || args[1].equalsIgnoreCase("main")){
-                    sender.sendMessage(helpPage("main", 1));
-                } else if (args.length == 3 && StringUtils.isNumeric(args[2])) {
-                    sender.sendMessage(helpPage(args[1].toLowerCase(), Integer.parseInt(args[2])));
-                } else {
-                    sender.sendMessage(helpPage(args[1], 1));
-                }
-
-            } else if (args[0].equalsIgnoreCase("commands") || args[0].equalsIgnoreCase("cmds") || args[0].equalsIgnoreCase("cmd") || args[0].equalsIgnoreCase("c")) {
-                sender.sendMessage(helpPage("commands", 1));
-            } else if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("r")) {
-                reloadConfig();
-                sender.sendMessage(info(0, null));
-            } else if (args[0].equalsIgnoreCase("version") || args[0].equalsIgnoreCase("ver") || args[0].equalsIgnoreCase("v")) {
-                sender.sendMessage(info(null, "Zutils is version Alpha v0.1"));
-            } else {
-                sender.sendMessage(error(0));
-            }
-
-            return true;
-        } else if (cmd.getName().equalsIgnoreCase("zchat")) {
-
-            sender.sendMessage(error(0));
-            return true;
-        }
-
-        return false;
     }
 
     public String error(Integer code) {
@@ -221,19 +174,4 @@ public final class Main extends JavaPlugin {
         return error(8);
     }
 
-    public void configDefaults() {
-
-        config.addDefault("Formatting.Prefix", "&8[Zutils] &r");
-        config.addDefault("Formatting.Error prefix", "&cError: &r");
-        config.addDefault("Formatting.Error color", "&c");
-        config.addDefault("Formatting.Info prefix", "&aInfo: &r");
-        config.addDefault("Formatting.Info color", "&a");
-        config.addDefault("Formatting.Message prefix", "");
-        config.addDefault("Formatting.Message color", "&b");
-        List<String> zpsi = Arrays.asList("Zpsi smells", "bad");
-        config.addDefault("Custom messages.zpsi", zpsi);
-        config.options().copyDefaults(true);
-        saveConfig();
-    }
 }
-
