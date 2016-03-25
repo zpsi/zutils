@@ -57,6 +57,12 @@ public class RegclickListener implements Listener {
             }
             rCommand.setPlayerInteractCheck(false);
             event.setCancelled(true);
+        } else {
+            Integer id = rManager.getID(event.getClickedBlock().getLocation());
+            if (id != null && rManager.getAction(id) == event.getAction() && rCommand.canRun(id, event.getPlayer())){
+                event.getPlayer().performCommand(rManager.getCommand(id));
+                event.setCancelled(true);
+            }
         }
     }
 

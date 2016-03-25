@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.libs.jline.internal.InputStreamReader;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.Action;
 import org.zpsi.dev.Main;
 
 import java.io.File;
@@ -56,10 +57,7 @@ public class RegclickManager {
             id = 1;
         } else {
             for (String i : ids) {
-                if (config.getConfigurationSection(i).getKeys(true) == null){
-                    id = Integer.parseInt(i);
-                    break;
-                } else {
+                if (!exists(Integer.parseInt(i))){
                     id = Integer.parseInt(i) + 1;
                 }
             }
@@ -74,17 +72,67 @@ public class RegclickManager {
         saveConfig();
     }
 
-    public void getID(Location loc){
-
+    public Integer getID(Location loc){
+        Integer id = null;
+        Set<String> ids = config.getKeys(false);
+        for (String i : ids){
+            if(getLocation(Integer.parseInt(i)) == loc){
+                id = Integer.parseInt(i);
+                break;
+            }
+        }
+        return id;
     }
 
     public boolean exists(Integer id){
-
+        if (config.isConfigurationSection(id.toString())){
+            return true;
+        }
         return false;
     }
 
-    public void storeLoc(Location loc){
-
+    public void addPlayer(Integer id, Player player){
+        config.getConfigurationSection(id.toString()).set("Player", player);
+        saveConfig();
     }
 
+    public void addLocation(Integer id, Location loc){
+        config.getConfigurationSection(id.toString()).set("Location", loc);
+        saveConfig();
+    }
+
+    public void addAction(Integer id, Action action){
+        config.getConfigurationSection(id.toString()).set("Action", action);
+        saveConfig();
+    }
+
+    public void addBuffer(Integer id, Integer buffer){
+        config.getConfigurationSection(id.toString()).set("Buffer", buffer);
+        saveConfig();
+    }
+
+    public void addCommand(Integer id, String command){
+        config.getConfigurationSection(id.toString()).set("Command", command);
+        saveConfig();
+    }
+
+    public Location getLocation(Integer id){
+        Location loc = (Location) config.getConfigurationSection(id.toString()).get("Location");
+        return loc;
+    }
+
+    public Action getAction(Integer id){
+        Action action = (Action) config.getConfigurationSection(id.toString()).get("Action");
+        return action;
+    }
+
+    public Integer getBuffer(Integer id){
+        Integer buffer = (Integer) config.getConfigurationSection(id.toString()).get("Buffer");
+        return buffer;
+    }
+
+    public String getCommand(Integer id){
+        String command = (String) config.getConfigurationSection(id.toString()).get("Command");
+        return command;
+    }
 }

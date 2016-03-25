@@ -32,12 +32,12 @@ public final class Main extends JavaPlugin {
         instance = this;
 
         this.config = getConfig();
+        configDefaults();
         this.cManager = new ChatManager(this);
         this.uManager = new UserManager(this);
         this.rManager = new RegclickManager(this);
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
         getServer().getPluginManager().registerEvents(new RegclickListener(this), this);
-        configDefaults();
     }
 
     public ChatManager getcManager() {

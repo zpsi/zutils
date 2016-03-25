@@ -102,11 +102,20 @@ public class RegclickCommand {
     }
 
     public void finalizeAdd() {
-
+        Integer id = rManager.regInit();
+        rManager.addPlayer(id, player);
+        rManager.addLocation(id, loc);
+        rManager.addAction(id, action);
+        rManager.addCommand(id, cmd);
+        rManager.addBuffer(id, buffer);
     }
 
     public void info(Location loc) {
 
+    }
+
+    public boolean canRun(Integer id, Player player){
+        return false;
     }
 
 }
