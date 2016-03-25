@@ -35,7 +35,6 @@ public final class Main extends JavaPlugin {
         this.cManager = new ChatManager(this);
         this.uManager = new UserManager(this);
         this.rManager = new RegclickManager(this);
-        this.rCommand = new RegclickCommand(this);
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
         getServer().getPluginManager().registerEvents(new RegclickListener(this), this);
         configDefaults();
@@ -159,7 +158,7 @@ public final class Main extends JavaPlugin {
                         }
                     }
                 }
-
+                this.rCommand = new RegclickCommand(this);
                 rCommand.init(1);
                 return true;
             } else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("r") || args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("d")) {
@@ -171,6 +170,7 @@ public final class Main extends JavaPlugin {
                         }
                     }
                 }
+                this.rCommand = new RegclickCommand(this);
                 rCommand.init(2);
                 return true;
             } else if (args[0].equalsIgnoreCase("information") || args[0].equalsIgnoreCase("info") || args[0].equalsIgnoreCase("i")) {
@@ -182,6 +182,7 @@ public final class Main extends JavaPlugin {
                         }
                     }
                 }
+                this.rCommand = new RegclickCommand(this);
                 rCommand.init(3);
                 return true;
             } else if (args[0].equalsIgnoreCase("stop") || args[0].equalsIgnoreCase("cancel") || args[0].equalsIgnoreCase("end")) {
@@ -194,6 +195,7 @@ public final class Main extends JavaPlugin {
                         }
                     }
                 }
+                this.rCommand = new RegclickCommand(this);
                 rCommand.init(3);
                 return true;
             }
