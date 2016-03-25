@@ -31,27 +31,40 @@ public class EventListener implements Listener {
         String eventPrefix = args[0];
         Player player = event.getPlayer();
         boolean run = false;
+        boolean start = true;
         int index = 0;
         if (config.isConfigurationSection("Custom messages")) {
             Set<String> keys = config.getConfigurationSection("Custom messages").getKeys(false);
             for (String s : keys) {
                 String sCommand = "/".concat(s);
                 if (sCommand.equalsIgnoreCase(eventPrefix)) {
-                    List<String> messages = config.getStringList("Custom messages." + s);
-                    if (args.length > 1) {
-                        int temp = Integer.parseInt(args[1]) - 1;
-                        if (StringUtils.isNumeric(args[1]) && temp >= 0 && temp < messages.size()) {
-                            index = temp;
-                            run = true;
-                        } else {
-                            player.sendMessage(cManager.error(1));
-                        }
-                    } else {
-                        index = (int) (Math.random() * (messages.size()));
-                        run = true;
+                    if (!plugin.commandIsEnabled("cmsg")) {
+                        event.getPlayer().sendMessage(cManager.error(9));
+                        start = false;
                     }
-                    if (run) {
-                        player.chat(messages.get(index));
+                    if (event.getPlayer().hasPermission("-zutils.*") && !event.getPlayer().isOp()) {
+                        if (event.getPlayer().hasPermission("-zutils.cmsg")) {
+                            event.getPlayer().sendMessage(cManager.error(6));
+                            start = false;
+                        }
+                    }
+                    if (start) {
+                        List<String> messages = config.getStringList("Custom messages." + s);
+                        if (args.length > 1) {
+                            int temp = Integer.parseInt(args[1]) - 1;
+                            if (StringUtils.isNumeric(args[1]) && temp >= 0 && temp < messages.size()) {
+                                index = temp;
+                                run = true;
+                            } else {
+                                player.sendMessage(cManager.error(1));
+                            }
+                        } else {
+                            index = (int) (Math.random() * (messages.size()));
+                            run = true;
+                        }
+                        if (run) {
+                            player.chat(messages.get(index));
+                        }
                     }
                     event.setCancelled(true);
                 }

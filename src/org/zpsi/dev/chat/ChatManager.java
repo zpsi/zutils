@@ -10,7 +10,7 @@ public class ChatManager {
     private FileConfiguration config;
     private String prefix;
 
-    public ChatManager(Main instance){
+    public ChatManager(Main instance) {
         this.plugin = instance.getInstance();
         config = plugin.getConfig();
         prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Formatting.Prefix"));
@@ -58,6 +58,10 @@ public class ChatManager {
                 errorMessage += "Help page not found.";
                 break;
             }
+            case 9: {
+                errorMessage += "Command has been disabled.";
+                break;
+            }
             default: {
                 errorMessage += "Unexpected error code.";
             }
@@ -102,9 +106,9 @@ public class ChatManager {
         Boolean isPage = false;
         if (topic.equalsIgnoreCase("main") || topic.equalsIgnoreCase("zutils") || topic.equalsIgnoreCase("z")) {
             maxPages = 1;
-            header =  ChatColor.DARK_AQUA + "Zutils main help page.";
-            switch(page){
-                case 1 : {
+            header = ChatColor.DARK_AQUA + "Zutils main help page.";
+            switch (page) {
+                case 1: {
                     commands = new String[5];
                     commands[0] = "zutils commands";
                     commands[1] = "zutils info";
@@ -121,14 +125,14 @@ public class ChatManager {
                     isPage = true;
                     break;
                 }
-                default : {
+                default: {
                     isPage = false;
                 }
             }
         } else if (topic.equalsIgnoreCase("commands") || topic.equalsIgnoreCase("cmds") || topic.equalsIgnoreCase("cmd")) {
-            header =  ChatColor.DARK_AQUA + "Zutils commands.";
-            switch(page) {
-                case 1 : {
+            header = ChatColor.DARK_AQUA + "Zutils commands.";
+            switch (page) {
+                case 1: {
                     maxPages = 1;
                     commands = new String[5];
                     commands[0] = "zutils";
@@ -146,7 +150,32 @@ public class ChatManager {
                     isPage = true;
                     break;
                 }
-                default : {
+                default: {
+                    isPage = false;
+                }
+            }
+        } else if (topic.equalsIgnoreCase("regclick") || topic.equalsIgnoreCase("rc")) {
+            header = ChatColor.DARK_AQUA + "Regclick commands.";
+            switch (page) {
+                case 1: {
+                    maxPages = 1;
+                    commands = new String[5];
+                    commands[0] = "regclick add";
+                    commands[1] = "regclick remove";
+                    commands[2] = "regclick stop";
+                    commands[3] = "regclick info";
+                    commands[4] = "regclick help";
+
+                    usage = new String[5];
+                    usage[0] = "Create a new regclick event.";
+                    usage[1] = "Remove an existing regclick event.";
+                    usage[2] = "Cancel the creation of a regclick event.";
+                    usage[3] = "View the attributes of an existing regclick event.";
+                    usage[4] = "View this page.";
+                    isPage = true;
+                    break;
+                }
+                default: {
                     isPage = false;
                 }
             }
